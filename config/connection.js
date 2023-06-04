@@ -1,9 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const User = require('./User');
-const Thoughts = require('./Thoughts');
-const Reactions = require('./Reactions');
-const Friends = require('./Friends');
+const { User, Thoughts, Reactions, Friends } = require('./models');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialmedia', {
   useNewUrlParser: true,
@@ -136,3 +133,5 @@ app.delete('/api/users/:userId/friends/:friendId', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
+
+module.exports = mongoose.connection;
