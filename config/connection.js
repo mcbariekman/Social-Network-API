@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { User, Thoughts, Reactions, Friends } = require('./models');
+const User = require('../models/User');
+const Thoughts = require('../models/Thoughts');
+const Reactions = require('../models/Reactions');
+const Friends = require('../models/Friends');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialmedia', {
   useNewUrlParser: true,
@@ -128,10 +131,6 @@ app.delete('/api/users/:userId/friends/:friendId', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: 'Failed to remove the friend.' });
   }
-});
-
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
 });
 
 module.exports = mongoose.connection;

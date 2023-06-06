@@ -1,16 +1,13 @@
 const router = require("express").Router();
-const {User} = require("../../models");
-
-router.get('/', async (req,res) => {
-    const allUsers = await User.find({});
-    
-    res.json(allUsers)
-})
+const { Thoughts } = require("../../models");
 
 router.post('/', async (req, res) => {
-    const newUser = await User.create(req.body);
+  try {
+    const newThought = await Thoughts.create(req.body);
+    res.json(newThought);
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to create a new thought.' });
+  }
+});
 
-    res.json(newUser)
-})
-
-module.exports = router
+module.exports = router;
