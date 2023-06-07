@@ -1,3 +1,4 @@
+// index.js
 const router = require('express').Router();
 const friendRoutes = require('./friend-routes');
 const reactionRoutes = require('./reaction-routes');
