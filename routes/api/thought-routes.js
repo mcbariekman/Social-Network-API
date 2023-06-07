@@ -5,7 +5,6 @@ const { Thought, User } = require("../../models");
 router.post('/', async (req, res) => {
   try {
     const newThought = await Thought.create(req.body);
-
     // Add the thought to the associated user's thoughts array
     const user = await User.findByIdAndUpdate(
       req.body.userId,

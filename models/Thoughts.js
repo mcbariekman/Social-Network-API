@@ -24,6 +24,6 @@ const thoughtsSchema = new Schema({
   ]
 });
 
-const Thoughts = model('Thoughts', thoughtsSchema);
+const Thought = model('Thought', thoughtsSchema);
 
-module.exports = Thoughts;
+module.exports = Thought;
