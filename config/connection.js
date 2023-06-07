@@ -1,9 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('../models/User');
-const Thoughts = require('../models/Thoughts');
-const Reactions = require('../models/Reactions');
-const Friends = require('../models/Friends');
+const Thought = require('../models/Thought');
+const Reaction = require('../models/Reaction');
+const Friend = require('../models/Friend');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/socialmedia', {
   useNewUrlParser: true,
@@ -46,7 +46,7 @@ app.delete('/api/users/:id', async (req, res) => {
 // Thoughts Routes
 app.post('/api/thoughts', async (req, res) => {
   try {
-    const newThought = await Thoughts.create(req.body);
+    const newThought = await Thought.create(req.body);
     res.json(newThought);
   } catch (error) {
     res.status(400).json({ error: 'Failed to create a new thought.' });
@@ -55,7 +55,7 @@ app.post('/api/thoughts', async (req, res) => {
 
 app.put('/api/thoughts/:id', async (req, res) => {
   try {
-    const updatedThought = await Thoughts.findByIdAndUpdate(
+    const updatedThought = await Thought.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -68,7 +68,7 @@ app.put('/api/thoughts/:id', async (req, res) => {
 
 app.delete('/api/thoughts/:id', async (req, res) => {
   try {
-    await Thoughts.findByIdAndDelete(req.params.id);
+    await Thought.findByIdAndDelete(req.params.id);
     res.json({ message: 'Thought deleted successfully.' });
   } catch (error) {
     res.status(400).json({ error: 'Failed to delete the thought.' });
@@ -78,8 +78,8 @@ app.delete('/api/thoughts/:id', async (req, res) => {
 // Reactions Routes
 app.post('/api/thoughts/:thoughtId/reactions', async (req, res) => {
   try {
-    const newReaction = await Reactions.create(req.body);
-    const thought = await Thoughts.findByIdAndUpdate(
+    const newReaction = await Reaction.create(req.body);
+    const thought = await Thought.findByIdAndUpdate(
       req.params.thoughtId,
       { $push: { reactions: newReaction._id } },
       { new: true }
@@ -92,12 +92,12 @@ app.post('/api/thoughts/:thoughtId/reactions', async (req, res) => {
 
 app.delete('/api/thoughts/:thoughtId/reactions/:reactionId', async (req, res) => {
   try {
-    const thought = await Thoughts.findByIdAndUpdate(
+    const thought = await Thought.findByIdAndUpdate(
       req.params.thoughtId,
       { $pull: { reactions: req.params.reactionId } },
       { new: true }
     );
-    await Reactions.findByIdAndDelete(req.params.reactionId);
+    await Reaction.findByIdAndDelete(req.params.reactionId);
     res.json({ message: 'Reaction removed successfully.' });
   } catch (error) {
     res.status(400).json({ error: 'Failed to remove the reaction.' });
@@ -107,7 +107,7 @@ app.delete('/api/thoughts/:thoughtId/reactions/:reactionId', async (req, res) =>
 // Friends Routes
 app.post('/api/users/:userId/friends', async (req, res) => {
   try {
-    const newFriend = await Friends.create(req.body);
+    const newFriend = await Friend.create(req.body);
     const user = await User.findByIdAndUpdate(
       req.params.userId,
       { $push: { friends: newFriend._id } },
@@ -126,11 +126,11 @@ app.delete('/api/users/:userId/friends/:friendId', async (req, res) => {
       { $pull: { friends: req.params.friendId } },
       { new: true }
     );
-    await Friends.findByIdAndDelete(req.params.friendId);
+    await Friend.findByIdAndDelete(req.params.friendId);
     res.json({ message: 'Friend removed successfully.' });
   } catch (error) {
     res.status(400).json({ error: 'Failed to remove the friend.' });
   }
 });
 
-module.exports = mongoose.connection;
+module.exports = app;
