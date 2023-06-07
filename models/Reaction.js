@@ -16,11 +16,10 @@ const reactionsSchema = new Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp)
+    default: Date.now
   }
 });
 
-const Reactions = model('Reactions', reactionsSchema);
+const Reaction = model('Reaction', reactionsSchema);
 
-module.exports = Reactions;
+module.exports = Reaction;
