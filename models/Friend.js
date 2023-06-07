@@ -13,6 +13,6 @@ const friendsSchema = new Schema({
   }
 });
 
-const Friends = model('Friends', friendsSchema);
+const Friend = model('Friend', friendsSchema);
 
-module.exports = Friends;
+module.exports = Friend;
