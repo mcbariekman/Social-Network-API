@@ -19,8 +19,8 @@ router.post('/:thoughtId/reactions', async (req, res) => {
       return res.status(404).json({ error: 'Thought not found.' });
     }
 
-    // Add the reaction to the associated user's reactions array
-    const user = await User.findByIdAndUpdate(
+    // Add the reaction to the associated thought's reactions array
+    const thought = await Thought.findByIdAndUpdate(
       userId,
       { $push: { reactions: newReaction._id } },
       { new: true }

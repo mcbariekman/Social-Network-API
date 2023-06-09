@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
   try {
     const newThought = await Thought.create(req.body);
     // Add the thought to the associated user's thoughts array
-    const user = await User.findByIdAndUpdate(
+    const thought = await Thought.findByIdAndUpdate(
       req.body.userId,
       { $push: { thoughts: newThought._id } },
       { new: true }
