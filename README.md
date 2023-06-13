@@ -87,15 +87,9 @@ Replace `:id`, `:thoughtId`, `:reactionId`, and `:userId` in the endpoints with 
 
 For detailed information about the request payloads and responses, refer to the API documentation or the source code.
 
-## Contributing
+## Contributions
 
-Contributions to this project are welcome. Feel free to open issues or submit pull requests to suggest improvements, report bugs, or add new features.
-
-1. Fork the repository.
-2. Create your feature branch: `git checkout -b my-new-feature`.
-3. Commit your changes: `git commit -am 'Add some feature'`.
-4. Push the branch: `git push origin my-new-feature`.
-5. Submit a pull request.
+This project is thanks to the work of tutors and TAs to get it running. Any coding within this project is thanks to them.
 
 ## License
 
