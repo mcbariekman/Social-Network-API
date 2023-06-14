@@ -1,18 +1,16 @@
 const { Schema, model } = require('mongoose');
+const User = require('./models/user');
 
-const userSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true
-    },
-    email: {
-      type: String,
-      required: true,
-      unique: true
-    },
+const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
     friends: [
       {
         type: Schema.Types.ObjectId,
@@ -39,6 +37,5 @@ userSchema.pre('remove', async function (next) {
   }
 });
 
-const User = model('User', userSchema);
-
+const User = mongoose.model('User', userSchema);
 module.exports = User;
