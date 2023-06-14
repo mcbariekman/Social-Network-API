@@ -8,6 +8,6 @@ const userRoutes = require('./user-routes');
 router.use('/users', userRoutes);
 router.use('/friends', friendRoutes);
 router.use('/reactions', reactionRoutes);
-router.use('/thoughts', thoughtRoutes);
+router.use('/thought', thoughtRoutes);
 
 module.exports = router;

@@ -30,9 +30,9 @@ const userSchema = new Schema(
 
 // Middleware function to remove associated thoughts when a user is deleted
 userSchema.pre('remove', async function (next) {
-  const Thoughts = model('Thoughts');
+  const Thought = model('Thought');
   try {
-    await Thoughts.deleteMany({ username: this.username });
+    await Thought.deleteMany({ username: this.username });
     next();
   } catch (error) {
     next(error);
