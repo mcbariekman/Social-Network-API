@@ -1,10 +1,13 @@
+// index.js
 const router = require('express').Router();
-const apiRoutes = require('./api/index');
+const friendRoutes = require('./friend-routes.js');
+const reactionRoutes = require('./reaction-routes');
+const thoughtRoutes = require('./thought-routes');
+const userRoutes = require('./user-routes');
 
-router.use('/api', apiRoutes);
-
-router.use((req, res) => {
-  return res.send('Wrong route');
-});
+router.use('/users', userRoutes);
+router.use('/friends', friendRoutes);
+router.use('/reactions', reactionRoutes);
+router.use('/thoughts', thoughtRoutes);
 
 module.exports = router;
