@@ -43,8 +43,8 @@ app.delete('/api/users/:id', async (req, res) => {
   }
 });
 
-// Thoughts Routes
-app.post('/api/thoughts', async (req, res) => {
+// Thought Routes
+app.post('/api/thought', async (req, res) => {
   try {
     const newThought = await Thought.create(req.body);
     res.json(newThought);
@@ -53,7 +53,7 @@ app.post('/api/thoughts', async (req, res) => {
   }
 });
 
-app.put('/api/thoughts/:id', async (req, res) => {
+app.put('/api/thought/:id', async (req, res) => {
   try {
     const updatedThought = await Thought.findByIdAndUpdate(
       req.params.id,
@@ -66,7 +66,7 @@ app.put('/api/thoughts/:id', async (req, res) => {
   }
 });
 
-app.delete('/api/thoughts/:id', async (req, res) => {
+app.delete('/api/thought/:id', async (req, res) => {
   try {
     await Thought.findByIdAndDelete(req.params.id);
     res.json({ message: 'Thought deleted successfully.' });
@@ -76,7 +76,7 @@ app.delete('/api/thoughts/:id', async (req, res) => {
 });
 
 // Reactions Routes
-app.post('/api/thoughts/:thoughtId/reactions', async (req, res) => {
+app.post('/api/thought/:thoughtId/reactions', async (req, res) => {
   try {
     const newReaction = await Reaction.create(req.body);
     const thought = await Thought.findByIdAndUpdate(
@@ -90,7 +90,7 @@ app.post('/api/thoughts/:thoughtId/reactions', async (req, res) => {
   }
 });
 
-app.delete('/api/thoughts/:thoughtId/reactions/:reactionId', async (req, res) => {
+app.delete('/api/thought/:thoughtId/reactions/:reactionId', async (req, res) => {
   try {
     const thought = await Thought.findByIdAndUpdate(
       req.params.thoughtId,
